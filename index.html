@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arkane Productions — Premium Beats</title>
+  <meta name="description" content="Premium beats engineered for artists who demand more. Trap, Drill, R&B, and more. Licensing from $29.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --purple:       #7B35D6;
+      --violet:       #C084FC;
+      --fuchsia:      #D046EF;
+      --void:         #06040A;
+      --deep:         #0D0818;
+      --aura:         #2A1052;
+      --white:        #F4EEFF;
+      --smoke:        #8B80A0;
+
+      --ff-display:   'Bebas Neue', sans-serif;
+      --ff-mono:      'Space Mono', monospace;
+      --ff-body:      'DM Sans', sans-serif;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--void);
+      color: var(--white);
+      font-family: var(--ff-body);
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── LAYOUT ─────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ─── UTILITIES ──────────────────────────────────────── */
+    .label {
+      font-family: var(--ff-mono);
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--violet);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .label::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--violet);
+      flex-shrink: 0;
+    }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn {
+      font-family: var(--ff-display);
+      font-size: .95rem;
+      letter-spacing: .1em;
+      padding: .85rem 2rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--purple);
+      color: var(--white);
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--violet), var(--fuchsia));
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(123,53,214,.5);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--violet);
+      border: 1px solid var(--purple);
+    }
+    .btn-secondary:hover {
+      background: rgba(123,53,214,.12);
+      border-color: var(--violet);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--smoke);
+      border: 1px solid rgba(139,128,160,.3);
+    }
+    .btn-ghost:hover { color: var(--white); border-color: var(--smoke); }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 1.25rem 0;
+      transition: background .3s, padding .3s, border-color .3s;
+    }
+    .nav.stuck {
+      background: rgba(6,4,10,.88);
+      backdrop-filter: blur(20px);
+      padding: .8rem 0;
+      border-bottom: 1px solid rgba(123,53,214,.18);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+    .nav-brand img { height: 38px; width: auto; }
+    .nav-brand-name {
+      font-family: var(--ff-display);
+      font-size: 1.35rem;
+      letter-spacing: .14em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--ff-mono);
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--violet); }
+    .nav-cta {
+      font-family: var(--ff-display);
+      font-size: .88rem;
+      letter-spacing: .1em;
+      padding: .55rem 1.4rem;
+      background: var(--purple);
+      color: var(--white);
+      transition: background .25s, box-shadow .25s;
+    }
+    .nav-cta:hover {
+      background: var(--violet);
+      box-shadow: 0 4px 18px rgba(192,132,252,.3);
+    }
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: var(--white);
+      transition: all .3s;
+    }
+
+    /* mobile drawer */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(6,4,10,.97);
+      z-index: 190;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer a {
+      font-family: var(--ff-display);
+      font-size: 2.5rem;
+      letter-spacing: .1em;
+      color: var(--white);
+    }
+    .mobile-drawer a:hover { color: var(--violet); }
+    .drawer-close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--smoke);
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(ellipse, rgba(123,53,214,.16) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* canvas waveform */
+    #heroCanvas {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      opacity: .28;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding-top: 7rem;
+      padding-bottom: 5rem;
+      max-width: 720px;
+    }
+    .hero-eyebrow {
+      font-family: var(--ff-mono);
+      font-size: .72rem;
+      letter-spacing: .28em;
+      color: var(--violet);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 40px; height: 1px;
+      background: var(--violet);
+    }
+    .hero-h1 {
+      font-family: var(--ff-display);
+      font-size: clamp(4rem, 9.5vw, 8.5rem);
+      line-height: .93;
+      letter-spacing: .02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-h1 .grad {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--violet) 60%, var(--fuchsia) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--smoke);
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* stats column */
+    .hero-stats {
+      position: absolute;
+      right: 0; top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+      z-index: 1;
+      padding-top: 7rem;
+    }
+    .stat { text-align: right; }
+    .stat-n {
+      font-family: var(--ff-display);
+      font-size: 2.8rem;
+      line-height: 1;
+      letter-spacing: .04em;
+    }
+    .stat-n .plus { color: var(--violet); }
+    .stat-l {
+      font-family: var(--ff-mono);
+      font-size: .62rem;
+      letter-spacing: .2em;
+      color: var(--smoke);
+      text-transform: uppercase;
+    }
+
+    /* scroll cue */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      z-index: 1;
+      animation: bob 2.2s ease-in-out infinite;
+    }
+    .scroll-cue-text {
+      font-family: var(--ff-mono);
+      font-size: .58rem;
+      letter-spacing: .22em;
+      color: var(--smoke);
+      text-transform: uppercase;
+    }
+    .scroll-cue-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, var(--purple), transparent);
+    }
+    @keyframes bob {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ─── TICKER ─────────────────────────────────────────── */
+    .ticker {
+      padding: 1.4rem 0;
+      background: var(--deep);
+      border-top: 1px solid rgba(123,53,214,.18);
+      border-bottom: 1px solid rgba(123,53,214,.18);
+      overflow: hidden;
+    }
+    .ticker-wrapper {
+      display: flex;
+      width: max-content;
+      will-change: transform;
+    }
+    .ticker-set {
+      display: flex;
+      flex-shrink: 0;
+    }
+    .ticker-item {
+      font-family: var(--ff-display);
+      font-size: .82rem;
+      letter-spacing: .16em;
+      color: var(--smoke);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+      padding-right: 2.5rem; /* spacing via padding so seam is invisible */
+    }
+    .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--purple); }
+    /* animation injected by JS using exact pixel width for seamless loop */
+
+    /* ─── SECTION COMMON ─────────────────────────────────── */
+    .section { padding: 7rem 0; }
+    .section-dark { background: var(--deep); }
+    .section-title {
+      font-family: var(--ff-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      letter-spacing: .05em;
+      line-height: 1;
+    }
+
+    /* ─── BEATS GRID ─────────────────────────────────────── */
+    .beats-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 2.8rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .beats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .beat-card {
+      background: var(--aura);
+      border: 1px solid rgba(123,53,214,.2);
+      padding: 1.5rem;
+      position: relative;
+      overflow: visible;
+      transition: transform .35s, box-shadow .35s;
+      cursor: pointer;
+    }
+    /* Glowing border effect element */
+    .card-glow-el {
+      position: absolute;
+      inset: -1px;
+      pointer-events: none;
+      z-index: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background: conic-gradient(
+        from calc((var(--glow-start, 0) - 80) * 1deg) at 50% 50%,
+        transparent 0deg,
+        #7B35D6 30deg,
+        #C084FC 70deg,
+        #D046EF 95deg,
+        #C084FC 115deg,
+        transparent 160deg,
+        transparent 360deg
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: var(--glow-active, 0);
+      transition: opacity .35s;
+    }
+    .beat-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(123,53,214,.06), transparent);
+      opacity: 0;
+      transition: opacity .35s;
+      z-index: 1;
+    }
+    .beat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 22px 55px rgba(42,16,82,.55);
+    }
+    .beat-card:hover::before { opacity: 1; }
+
+    .bc-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .bc-genre {
+      font-family: var(--ff-mono);
+      font-size: .62rem;
+      letter-spacing: .2em;
+      color: var(--violet);
+      text-transform: uppercase;
+      border: 1px solid rgba(192,132,252,.22);
+      padding: .28rem .75rem;
+      background: rgba(192,132,252,.07);
+    }
+    .bc-bpm {
+      font-family: var(--ff-mono);
+      font-size: .62rem;
+      letter-spacing: .15em;
+      color: var(--smoke);
+    }
+    .bc-title {
+      font-family: var(--ff-display);
+      font-size: 1.65rem;
+      letter-spacing: .05em;
+      margin-bottom: .3rem;
+    }
+    .bc-meta {
+      font-family: var(--ff-mono);
+      font-size: .6rem;
+      letter-spacing: .15em;
+      color: var(--smoke);
+      margin-bottom: 1.1rem;
+    }
+
+    /* waveform bars */
+    .bc-wave {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-bottom: 1.2rem;
+    }
+    .wave-bar {
+      flex: 1;
+      border-radius: 1.5px;
+      background: rgba(123,53,214,.4);
+      transform-origin: center;
+      transition: background .3s;
+    }
+    .beat-card:hover .wave-bar { background: var(--purple); }
+    .beat-card.is-playing .wave-bar {
+      background: var(--violet);
+      animation: wavepulse .55s ease-in-out infinite alternate;
+    }
+    @keyframes wavepulse {
+      from { transform: scaleY(.55); }
+      to   { transform: scaleY(1.1); }
+    }
+
+    .bc-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .bc-price-from {
+      font-family: var(--ff-mono);
+      font-size: .58rem;
+      letter-spacing: .15em;
+      color: var(--smoke);
+      text-transform: uppercase;
+    }
+    .bc-price-val {
+      font-family: var(--ff-display);
+      font-size: 1.7rem;
+      letter-spacing: .04em;
+    }
+    .bc-actions { display: flex; gap: .5rem; align-items: center; }
+    .play-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--purple);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background .25s, box-shadow .25s, transform .25s;
+    }
+    .play-btn:hover {
+      background: var(--violet);
+      box-shadow: 0 0 22px rgba(192,132,252,.42);
+      transform: scale(1.06);
+    }
+    .play-btn svg { width: 15px; height: 15px; fill: var(--white); }
+
+    /* ─── LICENSES ───────────────────────────────────────── */
+    .lic-intro { max-width: 440px; margin-top: 1rem; }
+    .lic-intro p {
+      font-size: .95rem;
+      color: var(--smoke);
+      line-height: 1.75;
+    }
+    .lic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .lic-card {
+      background: var(--aura);
+      border: 1px solid rgba(123,53,214,.2);
+      padding: 2rem;
+      position: relative;
+      transition: transform .35s, box-shadow .35s;
+    }
+    .lic-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 22px 55px rgba(42,16,82,.6);
+    }
+    .lic-card.featured {
+      border-color: var(--purple);
+      background: linear-gradient(145deg, rgba(42,16,82,.95), rgba(13,8,24,.95));
+    }
+    .lic-badge {
+      position: absolute;
+      top: -1px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--purple);
+      font-family: var(--ff-mono);
+      font-size: .58rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .22rem 1rem;
+      color: var(--white);
+      white-space: nowrap;
+    }
+    .lic-tier {
+      font-family: var(--ff-mono);
+      font-size: .65rem;
+      letter-spacing: .22em;
+      color: var(--violet);
+      text-transform: uppercase;
+      margin-bottom: .4rem;
+    }
+    .lic-name {
+      font-family: var(--ff-display);
+      font-size: 1.75rem;
+      letter-spacing: .06em;
+      margin-bottom: 1.25rem;
+    }
+    .lic-price {
+      font-family: var(--ff-display);
+      font-size: 3.2rem;
+      letter-spacing: .04em;
+      line-height: 1;
+      margin-bottom: .3rem;
+    }
+    .lic-price sup {
+      font-size: 1.4rem;
+      vertical-align: super;
+      color: var(--smoke);
+    }
+    .lic-desc {
+      font-size: .83rem;
+      color: var(--smoke);
+      line-height: 1.65;
+      margin-bottom: 1.75rem;
+    }
+    .lic-hr { height: 1px; background: rgba(123,53,214,.18); margin-bottom: 1.5rem; }
+    .lic-features { list-style: none; margin-bottom: 2rem; }
+    .lic-features li {
+      font-size: .83rem;
+      color: var(--smoke);
+      padding: .38rem 0;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .lic-features li::before {
+      content: '';
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      border: 1px solid var(--purple);
+      border-radius: 50%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237B35D6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/9px no-repeat;
+    }
+    .lic-features li.off { opacity: .38; }
+    .lic-features li.off::before { background: none; border-color: rgba(123,53,214,.25); }
+    .lic-btn { width: 100%; justify-content: center; }
+
+    /* ─── ABOUT ──────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-visual { position: relative; }
+    .about-logo-wrap {
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      aspect-ratio: 1;
+      position: relative;
+    }
+    .about-glow {
+      position: absolute;
+      inset: -15%;
+      background: radial-gradient(circle, rgba(208,70,239,.28) 0%, rgba(123,53,214,.22) 28%, transparent 65%);
+      filter: blur(18px);
+      pointer-events: none;
+    }
+    .about-logo-halo {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 84%; height: 84%;
+      border-radius: 50%;
+      border: 1px solid rgba(192,132,252,.5);
+      box-shadow:
+        0 0 20px  rgba(123,53,214,.75),
+        0 0 45px  rgba(123,53,214,.5),
+        0 0 85px  rgba(123,53,214,.28),
+        0 0 145px rgba(123,53,214,.14),
+        inset 0 0 20px rgba(123,53,214,.15);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .about-rings { position: absolute; inset: -18%; }
+    .about-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(123,53,214,.15);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .about-ring:nth-child(1) { width: 108%; height: 108%; }
+    .about-ring:nth-child(2) { width: 128%; height: 128%; border-color: rgba(123,53,214,.09); }
+    .about-ring:nth-child(3) { width: 148%; height: 148%; border-color: rgba(123,53,214,.05); }
+    .about-logo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 44px rgba(123,53,214,.45));
+    }
+    .about-content .label { margin-bottom: 1rem; }
+    .about-h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2.2rem, 4vw, 3.3rem);
+      letter-spacing: .06em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .about-p {
+      font-size: .97rem;
+      color: var(--smoke);
+      line-height: 1.8;
+      margin-bottom: 1.15rem;
+    }
+    .about-quote {
+      font-family: var(--ff-mono);
+      font-size: .78rem;
+      letter-spacing: .15em;
+      color: var(--violet);
+      border-left: 2px solid var(--purple);
+      padding-left: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* ─── TESTIMONIALS ───────────────────────────────────── */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .testi-card {
+      background: var(--aura);
+      border: 1px solid rgba(123,53,214,.14);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .35s, border-color .35s;
+    }
+    .testi-card::after {
+      content: '\201C';
+      position: absolute;
+      top: .8rem; right: 1.2rem;
+      font-family: var(--ff-display);
+      font-size: 5rem;
+      line-height: 1;
+      color: rgba(123,53,214,.12);
+    }
+    .testi-card:hover { transform: translateY(-4px); border-color: rgba(192,132,252,.24); }
+    .testi-text {
+      font-size: .93rem;
+      color: var(--white);
+      line-height: 1.72;
+      margin-bottom: 1.4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .testi-author { display: flex; align-items: center; gap: .75rem; }
+    .testi-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--fuchsia));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-display);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .testi-name {
+      font-family: var(--ff-mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+    }
+    .testi-handle {
+      font-family: var(--ff-mono);
+      font-size: .62rem;
+      letter-spacing: .08em;
+      color: var(--smoke);
+    }
+
+    /* ─── CTA BANNER ─────────────────────────────────────── */
+    .cta-section {
+      padding: 8rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(123,53,214,.12) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    /* horizontal rule glow lines */
+    .cta-section::before, .cta-section::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 1px;
+    }
+    .cta-section::before { top: 0; background: linear-gradient(to right, transparent, var(--purple), transparent); }
+    .cta-section::after  { bottom: 0; background: linear-gradient(to right, transparent, var(--purple), transparent); }
+    .cta-eyebrow {
+      font-family: var(--ff-mono);
+      font-size: .68rem;
+      letter-spacing: .26em;
+      color: var(--violet);
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+    .cta-h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(3rem, 7.5vw, 6.5rem);
+      letter-spacing: .04em;
+      line-height: .93;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-sub {
+      font-size: 1rem;
+      color: var(--smoke);
+      max-width: 460px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.72;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    .footer {
+      padding: 4.5rem 0 2rem;
+      border-top: 1px solid rgba(123,53,214,.18);
+      background: var(--void);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+    .footer-brand-name { font-family: var(--ff-display); font-size: 1.3rem; letter-spacing: .14em; }
+    .footer-brand-logo { display: flex; align-items: center; gap: .65rem; margin-bottom: .9rem; }
+    .footer-brand-logo img { height: 34px; }
+    .footer-desc {
+      font-size: .83rem;
+      color: var(--smoke);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .socials { display: flex; gap: .75rem; }
+    .soc {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(123,53,214,.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--smoke);
+      transition: all .25s;
+    }
+    .soc:hover { border-color: var(--purple); color: var(--violet); background: rgba(123,53,214,.1); }
+    .soc svg { width: 15px; height: 15px; }
+    .footer-col-title {
+      font-family: var(--ff-mono);
+      font-size: .62rem;
+      letter-spacing: .25em;
+      color: var(--violet);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: .55rem; }
+    .footer-col a { font-size: .83rem; color: var(--smoke); transition: color .22s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(123,53,214,.1);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy {
+      font-family: var(--ff-mono);
+      font-size: .62rem;
+      letter-spacing: .1em;
+      color: var(--smoke);
+    }
+    .footer-legal { display: flex; gap: 2rem; }
+    .footer-legal a {
+      font-family: var(--ff-mono);
+      font-size: .62rem;
+      letter-spacing: .1em;
+      color: var(--smoke);
+      transition: color .22s;
+    }
+    .footer-legal a:hover { color: var(--white); }
+
+    /* ─── DOTTED SURFACE ─────────────────────────────────── */
+    #dottedSurface {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    #dottedSurface canvas {
+      display: block;
+    }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: .1s; }
+    .reveal-d2 { transition-delay: .2s; }
+    .reveal-d3 { transition-delay: .3s; }
+    .reveal-d4 { transition-delay: .4s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .lic-grid, .testi-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .hero-stats { display: none; }
+      .about-grid { gap: 3.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .lic-grid, .testi-grid, .beats-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-visual { order: -1; }
+      .about-logo-wrap { max-width: 240px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .beats-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     NAV
+══════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">
+        <img src="brand_assets/Arkane_logo-removebg-preview.png" alt="Arkane">
+        <span class="nav-brand-name">ARKANE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#beats">Beats</a></li>
+        <li><a href="#licenses">Licenses</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://traktrain.com/arkane.prodz" target="_blank" class="nav-cta">BROWSE CATALOG</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer" id="drawer">
+  <button class="drawer-close" id="drawerClose" aria-label="Close menu">✕</button>
+  <a href="#beats"     onclick="closeDrawer()">Beats</a>
+  <a href="#licenses"  onclick="closeDrawer()">Licenses</a>
+  <a href="#about"     onclick="closeDrawer()">About</a>
+  <a href="#contact"   onclick="closeDrawer()">Contact</a>
+  <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-primary" style="margin-top:1rem"><span>BROWSE CATALOG</span></a>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <!-- Dotted wave surface — ported from DottedSurface React component (Three.js) -->
+  <div id="dottedSurface"></div>
+  <div class="hero-bg-glow"></div>
+
+  <canvas id="heroCanvas"></canvas>
+
+  <div class="container" style="position:relative;z-index:1;width:100%;">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Music Production · Arkane Productions</div>
+      <h1 class="hero-h1">
+        PRECISION.<br>
+        FREQUENCY.<br>
+        <span class="grad">REACH.</span>
+      </h1>
+      <p class="hero-sub">
+        Premium beats engineered for artists who demand more.
+        Every track crafted with intent — no filler, no compromise.
+      </p>
+      <div class="hero-actions">
+        <a href="#beats" class="btn btn-primary"><span>BROWSE BEATS</span></a>
+        <a href="#licenses" class="btn btn-secondary">VIEW LICENSES</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-n">200<span class="plus">+</span></div>
+        <div class="stat-l">Beats Available</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">500<span class="plus">+</span></div>
+        <div class="stat-l">Licenses Sold</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">50<span class="plus">+</span></div>
+        <div class="stat-l">Artists Served</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span class="scroll-cue-text">Scroll</span>
+    <div class="scroll-cue-line"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     TICKER
+══════════════════════════════════════════════════ -->
+<div class="ticker">
+  <div class="ticker-wrapper" id="tickerWrapper">
+    <!-- Set A -->
+    <div class="ticker-set" id="tickerSetA">
+      <span class="ticker-item">Dark Trap<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Melodic<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Cloud Rap<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Emo Rap<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Trap<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Atmospheric<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Boom Bap<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Acoustic<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Hard 808<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Emotional<span class="ticker-dot"></span></span>
+    </div>
+    <!-- Set B — identical copy for seamless loop -->
+    <div class="ticker-set" id="tickerSetB" aria-hidden="true">
+      <span class="ticker-item">Dark Trap<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Melodic<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Cloud Rap<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Emo Rap<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Trap<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Atmospheric<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Boom Bap<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Acoustic<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Hard 808<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Emotional<span class="ticker-dot"></span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     BEATS
+══════════════════════════════════════════════════ -->
+<section class="section" id="beats">
+  <div class="container">
+    <div class="beats-header">
+      <div>
+        <div class="label" style="margin-bottom:.75rem;">Featured Tracks</div>
+        <h2 class="section-title">LATEST DROPS</h2>
+      </div>
+      <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost">VIEW ALL →</a>
+    </div>
+
+    <div class="beats-grid" id="beatsGrid">
+
+      <!-- 1 · BLOODHOUND -->
+      <div class="beat-card reveal">
+        <div class="card-glow-el"></div>
+        <div class="bc-top">
+          <span class="bc-genre">Dark Trap</span>
+          <span class="bc-bpm">171 BPM</span>
+        </div>
+        <div class="bc-title">BLOODHOUND</div>
+        <div class="bc-meta">TRAP · HIP-HOP · MELODIC · CINEMATIC</div>
+        <div class="bc-wave" id="w1"></div>
+        <div class="bc-bottom">
+          <div>
+            <div class="bc-price-from">From</div>
+            <div class="bc-price-val">$29</div>
+          </div>
+          <div class="bc-actions">
+            <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost" style="padding:.48rem .9rem;font-size:.75rem;">LEASE</a>
+            <button class="play-btn" onclick="togglePlay(this)" aria-label="Play beat">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · MONACO HELL DRIVE -->
+      <div class="beat-card reveal reveal-d1">
+        <div class="card-glow-el"></div>
+        <div class="bc-top">
+          <span class="bc-genre">Chill Trap</span>
+          <span class="bc-bpm">88 BPM</span>
+        </div>
+        <div class="bc-title">MONACO HELL DRIVE</div>
+        <div class="bc-meta">EAST-COAST · AMBIENT · MELODIC</div>
+        <div class="bc-wave" id="w2"></div>
+        <div class="bc-bottom">
+          <div>
+            <div class="bc-price-from">From</div>
+            <div class="bc-price-val">$29</div>
+          </div>
+          <div class="bc-actions">
+            <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost" style="padding:.48rem .9rem;font-size:.75rem;">LEASE</a>
+            <button class="play-btn" onclick="togglePlay(this)" aria-label="Play beat">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · ATLANTICO -->
+      <div class="beat-card reveal reveal-d2">
+        <div class="card-glow-el"></div>
+        <div class="bc-top">
+          <span class="bc-genre">Pop / R&amp;B</span>
+          <span class="bc-bpm">176 BPM</span>
+        </div>
+        <div class="bc-title">ATLANTICO</div>
+        <div class="bc-meta">POP · R&amp;B · MELODIC · ATMOSPHERIC</div>
+        <div class="bc-wave" id="w3"></div>
+        <div class="bc-bottom">
+          <div>
+            <div class="bc-price-from">From</div>
+            <div class="bc-price-val">$29</div>
+          </div>
+          <div class="bc-actions">
+            <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost" style="padding:.48rem .9rem;font-size:.75rem;">LEASE</a>
+            <button class="play-btn" onclick="togglePlay(this)" aria-label="Play beat">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · ANGUIRO -->
+      <div class="beat-card reveal">
+        <div class="card-glow-el"></div>
+        <div class="bc-top">
+          <span class="bc-genre">Melodic Trap</span>
+          <span class="bc-bpm">145 BPM</span>
+        </div>
+        <div class="bc-title">ANGUIRO</div>
+        <div class="bc-meta">POP · TRAP · MELODIC · HARD 808</div>
+        <div class="bc-wave" id="w4"></div>
+        <div class="bc-bottom">
+          <div>
+            <div class="bc-price-from">From</div>
+            <div class="bc-price-val">$29</div>
+          </div>
+          <div class="bc-actions">
+            <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost" style="padding:.48rem .9rem;font-size:.75rem;">LEASE</a>
+            <button class="play-btn" onclick="togglePlay(this)" aria-label="Play beat">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 · DEMROPE -->
+      <div class="beat-card reveal reveal-d1">
+        <div class="card-glow-el"></div>
+        <div class="bc-top">
+          <span class="bc-genre">Atmospheric</span>
+          <span class="bc-bpm">154 BPM</span>
+        </div>
+        <div class="bc-title">DEMROPE</div>
+        <div class="bc-meta">EMO · AMBIENT · MELODIC · DARK TRAP</div>
+        <div class="bc-wave" id="w5"></div>
+        <div class="bc-bottom">
+          <div>
+            <div class="bc-price-from">From</div>
+            <div class="bc-price-val">$29</div>
+          </div>
+          <div class="bc-actions">
+            <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost" style="padding:.48rem .9rem;font-size:.75rem;">LEASE</a>
+            <button class="play-btn" onclick="togglePlay(this)" aria-label="Play beat">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 · MIBAMBO -->
+      <div class="beat-card reveal reveal-d2">
+        <div class="card-glow-el"></div>
+        <div class="bc-top">
+          <span class="bc-genre">Bouncy</span>
+          <span class="bc-bpm">162 BPM</span>
+        </div>
+        <div class="bc-title">MIBAMBO</div>
+        <div class="bc-meta">EMO · BOOM BAP · DUBSTEP · ENERGETIC</div>
+        <div class="bc-wave" id="w6"></div>
+        <div class="bc-bottom">
+          <div>
+            <div class="bc-price-from">From</div>
+            <div class="bc-price-val">$29</div>
+          </div>
+          <div class="bc-actions">
+            <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost" style="padding:.48rem .9rem;font-size:.75rem;">LEASE</a>
+            <button class="play-btn" onclick="togglePlay(this)" aria-label="Play beat">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 · IRIS -->
+      <div class="beat-card reveal">
+        <div class="card-glow-el"></div>
+        <div class="bc-top">
+          <span class="bc-genre">Dark Guitar</span>
+          <span class="bc-bpm">130 BPM</span>
+        </div>
+        <div class="bc-title">IRIS</div>
+        <div class="bc-meta">ACOUSTIC · HARD · MELODIC · JUICE WRLD</div>
+        <div class="bc-wave" id="w7"></div>
+        <div class="bc-bottom">
+          <div>
+            <div class="bc-price-from">From</div>
+            <div class="bc-price-val">$29</div>
+          </div>
+          <div class="bc-actions">
+            <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost" style="padding:.48rem .9rem;font-size:.75rem;">LEASE</a>
+            <button class="play-btn" onclick="togglePlay(this)" aria-label="Play beat">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 · TENESSY -->
+      <div class="beat-card reveal reveal-d1">
+        <div class="card-glow-el"></div>
+        <div class="bc-top">
+          <span class="bc-genre">Emotional</span>
+          <span class="bc-bpm">140 BPM</span>
+        </div>
+        <div class="bc-title">TENESSY</div>
+        <div class="bc-meta">TRAP · EMO · MELODIC · SAD PIANO</div>
+        <div class="bc-wave" id="w8"></div>
+        <div class="bc-bottom">
+          <div>
+            <div class="bc-price-from">From</div>
+            <div class="bc-price-val">$29</div>
+          </div>
+          <div class="bc-actions">
+            <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost" style="padding:.48rem .9rem;font-size:.75rem;">LEASE</a>
+            <button class="play-btn" onclick="togglePlay(this)" aria-label="Play beat">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 · 11 PM -->
+      <div class="beat-card reveal reveal-d2">
+        <div class="card-glow-el"></div>
+        <div class="bc-top">
+          <span class="bc-genre">Emo Rap</span>
+          <span class="bc-bpm">132 BPM</span>
+        </div>
+        <div class="bc-title">11 PM</div>
+        <div class="bc-meta">EMO · AMBIENT · CLOUD RAP · SAD GUITAR</div>
+        <div class="bc-wave" id="w9"></div>
+        <div class="bc-bottom">
+          <div>
+            <div class="bc-price-from">From</div>
+            <div class="bc-price-val">$29</div>
+          </div>
+          <div class="bc-actions">
+            <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost" style="padding:.48rem .9rem;font-size:.75rem;">LEASE</a>
+            <button class="play-btn" onclick="togglePlay(this)" aria-label="Play beat">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 · VOLTUX -->
+      <div class="beat-card reveal">
+        <div class="card-glow-el"></div>
+        <div class="bc-top">
+          <span class="bc-genre">Cloud Trap</span>
+          <span class="bc-bpm">140 BPM</span>
+        </div>
+        <div class="bc-title">VOLTUX</div>
+        <div class="bc-meta">TRAP · MELODIC · CLOUD RAP · DARK 808</div>
+        <div class="bc-wave" id="w10"></div>
+        <div class="bc-bottom">
+          <div>
+            <div class="bc-price-from">From</div>
+            <div class="bc-price-val">$29</div>
+          </div>
+          <div class="bc-actions">
+            <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-ghost" style="padding:.48rem .9rem;font-size:.75rem;">LEASE</a>
+            <button class="play-btn" onclick="togglePlay(this)" aria-label="Play beat">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /beats-grid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     LICENSES
+══════════════════════════════════════════════════ -->
+<section class="section section-dark" id="licenses">
+  <div class="container">
+    <div class="label" style="margin-bottom:.75rem;">Licensing</div>
+    <h2 class="section-title reveal">CHOOSE YOUR LICENSE</h2>
+    <div class="lic-intro reveal reveal-d1">
+      <p>From independent releases to full commercial use — find the right license for your project.</p>
+    </div>
+
+    <div class="lic-grid">
+
+      <!-- MP3 LEASE -->
+      <div class="lic-card reveal">
+        <div class="lic-tier">Tier 01</div>
+        <div class="lic-name">MP3 LEASE</div>
+        <div class="lic-price"><sup>$</sup>29</div>
+        <p class="lic-desc">For demos, SoundCloud, and YouTube. Untagged MP3 ready to record over immediately.</p>
+        <div class="lic-hr"></div>
+        <ul class="lic-features">
+          <li>MP3 (Untagged)</li>
+          <li>Up to 2,500 distribution copies</li>
+          <li>5,000 audio streams</li>
+          <li>5,000 video streams</li>
+          <li>1 music video</li>
+          <li>Non-profit performances up to 1,000</li>
+          <li class="off">WAV file</li>
+          <li class="off">Stem / track-outs</li>
+        </ul>
+        <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-secondary lic-btn">LEASE NOW</a>
+      </div>
+
+      <!-- PREMIUM LEASE (FEATURED) -->
+      <div class="lic-card featured reveal reveal-d1">
+        <div class="lic-badge">MOST POPULAR</div>
+        <div class="lic-tier">Tier 03</div>
+        <div class="lic-name">PREMIUM LEASE</div>
+        <div class="lic-price"><sup>$</sup>99</div>
+        <p class="lic-desc">High-quality stems and expanded rights for serious artists ready to release commercially.</p>
+        <div class="lic-hr"></div>
+        <ul class="lic-features">
+          <li>WAV + MP3 (Untagged)</li>
+          <li>Unlimited distribution copies</li>
+          <li>Unlimited audio streams</li>
+          <li>Unlimited video streams</li>
+          <li>Unlimited music videos</li>
+          <li>Paid performances included</li>
+          <li>Stem / track-outs included</li>
+          <li class="off">Exclusive ownership</li>
+        </ul>
+        <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-primary lic-btn"><span>GET THIS BEAT</span></a>
+      </div>
+
+      <!-- UNLIMITED -->
+      <div class="lic-card reveal reveal-d2">
+        <div class="lic-tier">Tier 04</div>
+        <div class="lic-name">UNLIMITED</div>
+        <div class="lic-price"><sup>$</sup>149</div>
+        <p class="lic-desc">Full unlimited use. No stream caps, no performance limits — maximum creative freedom.</p>
+        <div class="lic-hr"></div>
+        <ul class="lic-features">
+          <li>WAV + MP3 (Untagged)</li>
+          <li>Unlimited everything</li>
+          <li>Unlimited audio &amp; video streams</li>
+          <li>Unlimited music videos</li>
+          <li>Unlimited radio &amp; TV broadcasting</li>
+          <li>Unlimited paid performances</li>
+          <li>Stem / track-outs included</li>
+          <li class="off">Exclusive ownership</li>
+        </ul>
+        <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-secondary lic-btn">GET UNLIMITED</a>
+      </div>
+
+    </div><!-- /lic-grid -->
+
+    <!-- Exclusive CTA bar -->
+    <div style="margin-top:1.5rem;padding:1.5rem 2rem;border:1px solid rgba(208,70,239,.25);background:rgba(208,70,239,.04);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.22em;color:var(--fuchsia);text-transform:uppercase;margin-bottom:.3rem;">Tier 05 · Offers Only</div>
+        <div style="font-family:var(--ff-display);font-size:1.5rem;letter-spacing:.06em;">EXCLUSIVE RIGHTS</div>
+        <div style="font-family:var(--ff-body);font-size:.83rem;color:var(--smoke);margin-top:.3rem;">Full ownership · Beat removed from store · Never re-sold · WAV + MP3 + Stems · All rights transferred</div>
+      </div>
+      <a href="mailto:arkane.prodz@gmail.com" class="btn btn-secondary" style="border-color:rgba(208,70,239,.4);color:var(--fuchsia);">MAKE AN OFFER</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════════════ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-visual reveal">
+        <div class="about-logo-wrap">
+          <div class="about-glow"></div>
+          <div class="about-logo-halo"></div>
+          <div class="about-rings">
+            <div class="about-ring"></div>
+            <div class="about-ring"></div>
+            <div class="about-ring"></div>
+          </div>
+          <img src="brand_assets/Arkane_logo-removebg-preview.png" alt="Arkane Productions">
+        </div>
+      </div>
+
+      <div class="about-content">
+        <div class="label" style="margin-bottom:1rem;">The Producer</div>
+        <h2 class="about-h2 reveal">SOUND ENGINEERED<br>WITH INTENT</h2>
+        <p class="about-p reveal">
+          Arkane Productions is built on one principle: every beat should hit with purpose.
+          No filler, no trends chased — just precision-crafted sound designed to elevate your art.
+        </p>
+        <p class="about-p reveal reveal-d1">
+          From dark trap atmospheres to melodic drill arrangements, every track is
+          mixed and mastered to professional standards — ready for your next release.
+        </p>
+        <div class="about-quote reveal reveal-d2">
+          "Arkane did it again."
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════════════ -->
+<section class="section section-dark" id="testimonials">
+  <div class="container">
+    <div class="label" style="margin-bottom:.75rem;">Artists Say</div>
+    <h2 class="section-title reveal">THE WORD IS OUT</h2>
+
+    <div class="testi-grid">
+
+      <div class="testi-card reveal">
+        <p class="testi-text">
+          "Arkane's beats carry a weight most producers can't touch.
+          The mix is always clean and the energy hits different."
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar">K</div>
+          <div>
+            <div class="testi-name">KHALID M.</div>
+            <div class="testi-handle">@khalidm · Independent Artist</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-d1">
+        <p class="testi-text">
+          "Bought the exclusive on PHANTOM — best decision I made this year.
+          Dropped it and the response was immediate."
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div>
+            <div class="testi-name">RIVEN.</div>
+            <div class="testi-handle">@riven · Rapper / Songwriter</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal reveal-d2">
+        <p class="testi-text">
+          "The stems are pristine. As a mix engineer, that matters.
+          Arkane is one of the few producers I actually trust."
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar">D</div>
+          <div>
+            <div class="testi-name">DANA F.</div>
+            <div class="testi-handle">@danafmix · Mix Engineer</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     CTA
+══════════════════════════════════════════════════ -->
+<section class="cta-section" id="contact">
+  <div class="cta-glow"></div>
+  <div class="container">
+    <div class="cta-eyebrow">· Ready to create ·</div>
+    <h2 class="cta-h2 reveal">YOUR SOUND.<br>YOUR VISION.</h2>
+    <p class="cta-sub reveal reveal-d1">
+      Browse the full catalog on TrakTrain.
+      Or reach out directly — custom beats and exclusives available on request.
+    </p>
+    <div class="cta-actions reveal reveal-d2">
+      <a href="https://traktrain.com/arkane.prodz" target="_blank" class="btn btn-primary"><span>BROWSE CATALOG</span></a>
+      <a href="mailto:arkane.prodz@gmail.com" class="btn btn-secondary">CUSTOM INQUIRY</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div>
+        <div class="footer-brand-logo">
+          <img src="brand_assets/Arkane_logo-removebg-preview.png" alt="Arkane">
+          <span class="footer-brand-name">ARKANE</span>
+        </div>
+        <p class="footer-desc">Premium beats for artists who demand precision. Every track built with intent.</p>
+        <div class="socials">
+          <!-- Instagram -->
+          <a href="#" class="soc" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <!-- X/Twitter -->
+          <a href="#" class="soc" aria-label="X">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="#" class="soc" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <!-- TrakTrain -->
+          <a href="https://traktrain.com/arkane.prodz" target="_blank" class="soc" aria-label="TrakTrain">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"/>
+              <circle cx="6" cy="18" r="3"/>
+              <circle cx="18" cy="16" r="3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Catalog</div>
+        <ul>
+          <li><a href="#">Trap Beats</a></li>
+          <li><a href="#">Drill Beats</a></li>
+          <li><a href="#">R&amp;B Beats</a></li>
+          <li><a href="#">Melodic Beats</a></li>
+          <li><a href="#">Afrobeats</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Licensing</div>
+        <ul>
+          <li><a href="https://traktrain.com/arkane.prodz" target="_blank">MP3 Lease — $29</a></li>
+          <li><a href="https://traktrain.com/arkane.prodz" target="_blank">WAV Lease — $49</a></li>
+          <li><a href="https://traktrain.com/arkane.prodz" target="_blank">Premium Lease — $99</a></li>
+          <li><a href="https://traktrain.com/arkane.prodz" target="_blank">Unlimited — $149</a></li>
+          <li><a href="mailto:arkane.prodz@gmail.com">Exclusive — Offers</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Links</div>
+        <ul>
+          <li><a href="https://traktrain.com/arkane.prodz" target="_blank">TrakTrain Store</a></li>
+          <li><a href="mailto:arkane.prodz@gmail.com">Contact</a></li>
+          <li><a href="#">Licensing FAQ</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+
+    </div><!-- /footer-grid -->
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 ARKANE PRODUCTIONS · ALL RIGHTS RESERVED</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Licensing</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Three.js (for DottedSurface hero background) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<!-- ══════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════ -->
+<script>
+/* ─── DOTTED SURFACE (ported from DottedSurface.tsx) ── */
+(function initDottedSurface() {
+  const container = document.getElementById('dottedSurface');
+  if (!container || typeof THREE === 'undefined') return;
+
+  /* ── Config (mirrors the React component) ── */
+  const SEPARATION = 150;
+  const AMOUNTX    = 40;
+  const AMOUNTY    = 60;
+
+  /* ── Scene ── */
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth / window.innerHeight,
+    1,
+    10000
+  );
+  camera.position.set(0, 355, 1220);
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0); /* fully transparent background */
+  container.appendChild(renderer.domElement);
+
+  /* ── Geometry: grid of particles ── */
+  const positions = [];
+  const colors    = [];
+
+  for (let ix = 0; ix < AMOUNTX; ix++) {
+    for (let iy = 0; iy < AMOUNTY; iy++) {
+      /* x, y (animated), z */
+      positions.push(
+        ix * SEPARATION - (AMOUNTX * SEPARATION) / 2,
+        0,
+        iy * SEPARATION - (AMOUNTY * SEPARATION) / 2
+      );
+
+      /* Alternate Electric Purple (#7B35D6) and Violet Haze (#C084FC)
+         normalized 0-1 for THREE.Float32BufferAttribute vertex colors */
+      if ((ix + iy) % 2 === 0) {
+        colors.push(0.482, 0.208, 0.839); /* Electric Purple */
+      } else {
+        colors.push(0.753, 0.518, 0.988); /* Violet Haze     */
+      }
+    }
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute('color',    new THREE.Float32BufferAttribute(colors,    3));
+
+  /* ── Glow sprite texture ── */
+  const gc = document.createElement('canvas');
+  gc.width = gc.height = 64;
+  const gx = gc.getContext('2d');
+  const gr = gx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gr.addColorStop(0,    'rgba(255,255,255,1)');
+  gr.addColorStop(0.2,  'rgba(255,255,255,0.9)');
+  gr.addColorStop(0.5,  'rgba(255,255,255,0.4)');
+  gr.addColorStop(1,    'rgba(255,255,255,0)');
+  gx.fillStyle = gr;
+  gx.fillRect(0, 0, 64, 64);
+
+  /* ── Material ── */
+  const material = new THREE.PointsMaterial({
+    size:            22,
+    map:             new THREE.CanvasTexture(gc),
+    vertexColors:    true,
+    transparent:     true,
+    opacity:         0.85,
+    blending:        THREE.AdditiveBlending,
+    depthWrite:      false,
+    sizeAttenuation: true,
+  });
+
+  const points = new THREE.Points(geometry, material);
+  scene.add(points);
+
+  /* ── Pause when hero is off-screen (perf) ── */
+  let heroVisible = true;
+  const heroEl = document.getElementById('home');
+  if (heroEl && 'IntersectionObserver' in window) {
+    new IntersectionObserver(
+      ([entry]) => { heroVisible = entry.isIntersecting; },
+      { threshold: 0 }
+    ).observe(heroEl);
+  }
+
+  /* ── Animation loop ── */
+  let count = 0;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!heroVisible) return;
+
+    const posAttr = geometry.attributes.position;
+    const pos     = posAttr.array;
+
+    let i = 0;
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        /* Dual sine-wave ripple — identical to the React component */
+        pos[i * 3 + 1] =
+          Math.sin((ix + count) * 0.3) * 50 +
+          Math.sin((iy + count) * 0.5) * 50;
+        i++;
+      }
+    }
+
+    posAttr.needsUpdate = true;
+    renderer.render(scene, camera);
+    count += 0.08; /* slightly slower than original (0.1) for subtlety */
+  }
+
+  /* ── Resize ── */
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }, { passive: true });
+
+  animate();
+})();
+
+/* ─── NAV SCROLL ──────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('stuck', window.scrollY > 60);
+}, { passive: true });
+
+/* ─── MOBILE DRAWER ───────────────────────── */
+const drawer = document.getElementById('drawer');
+document.getElementById('hamburger').addEventListener('click', () => drawer.classList.add('open'));
+document.getElementById('drawerClose').addEventListener('click', () => drawer.classList.remove('open'));
+function closeDrawer() { drawer.classList.remove('open'); }
+
+/* ─── HERO CANVAS WAVEFORM ────────────────── */
+const canvas = document.getElementById('heroCanvas');
+const ctx = canvas.getContext('2d');
+let t = 0;
+
+function resizeCanvas() {
+  canvas.width  = window.innerWidth;
+  canvas.height = 200;
+}
+
+function drawWave() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Wave 1 – primary
+  const g1 = ctx.createLinearGradient(0, 0, canvas.width, 0);
+  g1.addColorStop(0,   'rgba(123,53,214,0)');
+  g1.addColorStop(0.2, 'rgba(123,53,214,0.7)');
+  g1.addColorStop(0.5, 'rgba(192,132,252,0.85)');
+  g1.addColorStop(0.8, 'rgba(123,53,214,0.7)');
+  g1.addColorStop(1,   'rgba(123,53,214,0)');
+  ctx.strokeStyle = g1;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  const cy = canvas.height / 2;
+  for (let x = 0; x < canvas.width; x++) {
+    const p = x / canvas.width;
+    const y = cy + 58 * (
+      Math.sin(p * 22 + t)       * 0.45 +
+      Math.sin(p * 13 + t * 1.3) * 0.30 +
+      Math.sin(p *  7 + t * 0.7) * 0.25
+    );
+    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Wave 2 – accent
+  ctx.strokeStyle = 'rgba(208,70,239,0.28)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let x = 0; x < canvas.width; x++) {
+    const p = x / canvas.width;
+    const y = cy + 38 * (
+      Math.sin(p * 16 + t * 1.1 + 1.2) * 0.55 +
+      Math.sin(p *  9 + t * 0.9 + 2.4) * 0.45
+    );
+    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  t += 0.016;
+  requestAnimationFrame(drawWave);
+}
+
+resizeCanvas();
+drawWave();
+window.addEventListener('resize', resizeCanvas, { passive: true });
+
+/* ─── SEAMLESS TICKER ──────────────────────── */
+(function initTicker() {
+  const wrapper = document.getElementById('tickerWrapper');
+  const setA    = document.getElementById('tickerSetA');
+  if (!wrapper || !setA) return;
+
+  // Measure exact width of one set after fonts load
+  function startTicker() {
+    const setW = setA.offsetWidth;
+    if (setW === 0) { requestAnimationFrame(startTicker); return; }
+
+    const dur = Math.round(setW / 55); // ~55px/s feels natural
+    const sheet = document.createElement('style');
+    sheet.textContent =
+      `@keyframes tickerMove {` +
+        `from { transform: translateX(0); }` +
+        `to   { transform: translateX(-${setW}px); }` +
+      `}` +
+      `#tickerWrapper { animation: tickerMove ${dur}s linear infinite; }`;
+    document.head.appendChild(sheet);
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(startTicker);
+  } else {
+    window.addEventListener('load', startTicker);
+  }
+})();
+
+/* ─── BEAT CARD WAVEFORMS ──────────────────── */
+function buildWaveform(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const bars = 50;
+  for (let i = 0; i < bars; i++) {
+    const p  = i / bars;
+    const h  = 0.12 + 0.88 * Math.abs(
+      Math.sin(p * Math.PI * 2.8 + Math.random() * 0.6) * 0.55 +
+      Math.sin(p * Math.PI * 7   + Math.random() * 0.4) * 0.30 +
+      Math.random() * 0.15
+    );
+    const bar = document.createElement('div');
+    bar.className = 'wave-bar';
+    bar.style.height = `${Math.min(100, Math.max(8, h * 100))}%`;
+    bar.style.animationDelay = `${i * 0.018}s`;
+    el.appendChild(bar);
+  }
+}
+for (let i = 1; i <= 10; i++) buildWaveform(`w${i}`);
+
+/* ─── PLAY TOGGLE ──────────────────────────── */
+let activeCard = null;
+
+function togglePlay(btn) {
+  const card = btn.closest('.beat-card');
+  const path = btn.querySelector('svg path');
+  const PLAY  = 'M8 5v14l11-7z';
+  const PAUSE = 'M6 19h4V5H6v14zm8-14v14h4V5h-4z';
+
+  if (activeCard && activeCard !== card) {
+    activeCard.classList.remove('is-playing');
+    activeCard.querySelector('.play-btn svg path').setAttribute('d', PLAY);
+  }
+
+  const playing = card.classList.toggle('is-playing');
+  path.setAttribute('d', playing ? PAUSE : PLAY);
+  activeCard = playing ? card : null;
+}
+
+/* ─── GLOWING CARD BORDER EFFECT ───────────── */
+(function () {
+  const PROXIMITY = 80;
+  const SPREAD    = 80; // degrees of conic sweep shown
+
+  document.querySelectorAll('.beat-card').forEach(card => {
+    let rafId = 0;
+
+    function update(e) {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        const mx = e.clientX, my = e.clientY;
+        const near =
+          mx > rect.left  - PROXIMITY &&
+          mx < rect.right + PROXIMITY &&
+          my > rect.top   - PROXIMITY &&
+          my < rect.bottom + PROXIMITY;
+
+        if (!near) {
+          card.style.setProperty('--glow-active', '0');
+          return;
+        }
+
+        card.style.setProperty('--glow-active', '1');
+
+        const cx = rect.left + rect.width  * 0.5;
+        const cy = rect.top  + rect.height * 0.5;
+        const angle = Math.atan2(my - cy, mx - cx) * (180 / Math.PI) + 90;
+
+        // Smooth angle transition via simple lerp on next frame
+        const current = parseFloat(card.style.getPropertyValue('--glow-start') || '0');
+        const diff    = ((angle - current + 180) % 360) - 180;
+        card.style.setProperty('--glow-start', String(current + diff * 0.18));
+      });
+    }
+
+    window.addEventListener('pointermove', update, { passive: true });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--glow-active', '0');
+    });
+  });
+})();
+
+/* ─── SCROLL REVEAL ────────────────────────── */
+const revealEls = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => ro.observe(el));
+</script>
+
+</body>
+</html>
